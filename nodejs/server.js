@@ -1,11 +1,13 @@
 var
-    app         = require('http').createServer(handler),
-    io 	        = require('socket.io')(app),
+    app         = require('express')(),
+    http        = require('http').Server(app);
+    io 	        = require('socket.io')(http),
     redis       = require('redis'),
     fs          = require('fs'),
     redisClient = redis.createClient();
 
-app.listen(3000);
+http.listen(3000);
 
-io.on('connection', function(socket) {
-    socket.emit('welcome',  { message: 'Realtime Server!'} );
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
