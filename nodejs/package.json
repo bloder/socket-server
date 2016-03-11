@@ -1,0 +1,18 @@
+{
+  "name": "realtime-app",
+  "version": "0.0.1",
+  "description": "Realtime App",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.10.2",
+    "redis": "~0.12.1",
+    "socket.io": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Bloder",
+  "license": "ISC"
+}
