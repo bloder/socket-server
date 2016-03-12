@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+window.app.user = {
+  connect : function(){
+    window.app.socket = io.connect("http://0.0.0.0:3000");
+
+    window.app.socket.on("user-data", function(message){
+      window.app.trigger(message.resource, message);
+    });
+  }
+}
