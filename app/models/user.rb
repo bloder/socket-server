@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  after_create {|user| user.user 'create' }
+  after_update {|user| user.user 'update' }
+  after_destroy {|user| user.user 'destroy' }
 
   def user action
   msg = { resource: 'user',
@@ -6,6 +9,6 @@ class User < ActiveRecord::Base
           id: self.id,
           obj: self }
 
-  $redisClient.publish 'user-data', msg.to_json
+  $redis.publish 'rt-change', msg.to_json
   end
 end

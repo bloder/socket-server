@@ -1,9 +1,9 @@
-window.app.user = {
+window.app.nodejs = {
   connect : function(){
-    window.app.socket = io.connect("http://0.0.0.0:3000");
+    window.app.socket = io.connect("http://localhost:4000");
 
-    window.app.socket.on("user-data", function(message){
-      window.app.trigger(message.resource, message);
+    window.app.socket.on("rt-change", function(user){
+      window.app.trigger(user.resource, user);
     });
   }
 }

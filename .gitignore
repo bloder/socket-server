@@ -15,7 +15,3 @@
 /log/*
 !/log/.keep
 /tmp
-
-
-# ignore node modules
-/nodejs/node_modules

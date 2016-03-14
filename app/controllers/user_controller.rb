@@ -8,4 +8,8 @@ class UserController < ApplicationController
 
   def show
   end
+
+  def user_params
+      params.require(:user).permit(:name, :age)
+    end
 end
