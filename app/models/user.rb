@@ -1,14 +1,11 @@
 class User < ActiveRecord::Base
-  after_create {|user| user.user 'create' }
-  after_update {|user| user.user 'update' }
-  after_destroy {|user| user.user 'destroy' }
 
-  def user action
-  msg = { resource: 'user',
-          action: action,
-          id: self.id,
-          obj: self }
-
-  $redis.publish 'rt-change', msg.to_json
-  end
+  after_create {
+    $redis.publish 'rt-change', user: User.new(
+    id: self.id,
+    name: self.name,
+    age: self.age,
+    created_at: self.created_at,
+    updated_at: self.updated_at).to_json
+  }
 end
