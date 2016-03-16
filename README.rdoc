@@ -1,1 +1,30 @@
-==== An socket server example made with :heart:
+== <i>Socket server example</i>
+
+http://guru-ce.github.io/assets/images/profile.png
+
+This is a socket server example made with:
+
+- Ruby on Rails
+- Socket IO
+- Redis 
+- NodeJS
+
+=== <i>How does it work?</i>
+
+Just a Rest API (very simple) that publishes events to Redis and a Node server wich subscribes these events.
+
+=== <i>Initializing Aplication</i>
+
+- Initialize Redis server
+
+   $redis-server
+
+- Initialize Node server (inside nodejs folder)
+ 
+   $node server.js
+
+- Initialize Rails server
+  
+   $rails server
+
+====== I know it's not a great example, this is very simple, but maybe you can develop something better with this example.
