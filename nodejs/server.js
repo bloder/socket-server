@@ -1,17 +1,26 @@
+var app = require('http').createServer();
 var redis = require('redis').createClient();
-var io = require('socket.io').listen(5001);
+var io = require('socket.io')(app);
+
+app.listen(5001);
 
 redis.subscribe('rt-change');
 
-io.on('connection', function(socket){
- console.log('connected socket')
- socket.on('disconnect', function(){
- console.log('client disconnected')
- socket.disconnect();
- });
+redis.on('message', function(channel, message){
+   var info = JSON.parse(message);
+   io.sockets.emit(channel, info);
+   console.log('emit '+ channel);
 });
 
-redis.on('message', function(channel, message){
-   io.sockets.emit(channel, message);
-   console.log('emit '+ message);
+io.sockets.on('connection', function(socket){
+ console.log('connected socket')
+
+ socket.on('rt-change', function(data){
+   console.log('hueheu       '+data)
+ });
+
+ socket.on('disconnect', function(){
+ console.log('disconnected from socket')
+ socket.disconnect();
+ });
 });

@@ -2,6 +2,7 @@ class UserController < ApplicationController
   def index
     @users = User.all
     respond_to do |format|
+      format.html
       format.json {render action: 'index', status: :ok}
     end
   end
@@ -14,7 +15,7 @@ class UserController < ApplicationController
 
   respond_to do |format|
   if @user.save
-    format.json{ render json: @user, status: :created }
+    render json: @user
   else
     format.json{ render json: @user.errors, status: :unprocessable_entity }
   end
