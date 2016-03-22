@@ -1,23 +1,32 @@
 var app = require('http').createServer();
+var port = process.env.PORT || 8000;
 var redis = require('redis').createClient();
-var io = require('socket.io')(app);
+var io  = require('socket.io').listen(app, {
+    "transports": ['websocket',
+                   'flashsocket',
+                   'htmlfile',
+                   'xhr-polling',
+                   'jsonp-polling',
+                   'polling'],
+    "polling duration": 10
+});
 
-app.listen(5001);
+redis.subscribe('user-created');
 
-redis.subscribe('rt-change');
+app.listen(port);
 
 redis.on('message', function(channel, message){
    var info = JSON.parse(message);
-   io.sockets.emit(channel, info);
+   io.sockets.emit('user-created', info);
    console.log('emit '+ channel);
+});
+
+io.sockets.on('user-created', function(data){
+  console.log('hueheu       '+data)
 });
 
 io.sockets.on('connection', function(socket){
  console.log('connected socket')
-
- socket.on('rt-change', function(data){
-   console.log('hueheu       '+data)
- });
 
  socket.on('disconnect', function(){
  console.log('disconnected from socket')

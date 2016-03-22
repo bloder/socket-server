@@ -1,11 +1,14 @@
-<script src="/socket.io/socket.io.js"></script>
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="/javascripts/socket.io.js"></script>
 <script>
-var socket = io.connect('http://localhost:5001/');
+var socket = io.connect('http://localhost:8000/');
 
-socket.on('rt-change', function(data){
-  console.log('hueheu       '+data)
+socket.on('connect', function(){
+  alert('HELLO WORLD');
+});
+
+socket.on('user-created', function(data){
+  alert('hueheu       '+data.name)
 });
 </script>
 
