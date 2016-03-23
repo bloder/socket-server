@@ -9,6 +9,7 @@ socket.on('connect', function(){
 
 socket.on('user-created', function(data){
   alert('hueheu       '+data.name)
+  socket.emit('user-created', data);
 });
 </script>
 
