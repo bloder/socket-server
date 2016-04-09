@@ -2,15 +2,6 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
 var socket = io.connect('http://localhost:8000/');
-
-socket.on('connect', function(){
-  alert('HELLO WORLD');
-});
-
-socket.on('user-created', function(data){
-  alert('hueheu       '+data.name)
-  socket.emit('user-created', data);
-});
 </script>
 
 <h1>User#index</h1>
