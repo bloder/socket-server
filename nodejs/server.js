@@ -19,10 +19,3 @@ redis.on('message', function(channel, message){
    var info = JSON.parse(message);
    io.sockets.emit('user-created', info);
 });
-
-io.sockets.on('connection', function(socket){
- socket.on('disconnect', function(){
- console.log('disconnected from socket')
- socket.disconnect();
- });
-});
